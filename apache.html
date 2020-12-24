@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!-- saved from url=(0017)http://localhost/ -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Index of /</title>
+</head>
+
+<body>
+<h1>Index of /</h1>
+<table>
+    <tbody>
+    <tr>
+        <th valign="top"><img src="./img/blank.gif" alt="[ICO]"></th>
+        <th><a href="http://localhost/?C=N;O=D">Name</a></th>
+        <th><a href="http://localhost/?C=M;O=A">Last modified</a></th>
+        <th><a href="http://localhost/?C=S;O=A">Size</a></th>
+        <th><a href="http://localhost/?C=D;O=A">Description</a></th>
+    </tr>
+
+
+    <!-- <tr>
+      <td valign="top"><img src="./img/folder.gif" alt="[DIR]"></td>
+      <td><a href="">201805/</a> </td>
+      <td align="right">2018-06-21 17:13 </td>
+      <td align="right"> - </td>
+      <td>&nbsp;</td>
+    </tr> -->
+
+
+    </tbody>
+</table>
+<address>Apache/2.4.33 (Win32) OpenSSL/1.1.0g PHP/7.2.4 Server at localhost Port 80</address>
+
+</body>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            console.log(xhr.responseText);
+            var data = JSON.parse(xhr.responseText);
+            console.log(data);
+            var htmls = '';
+            for (var i = 0; i < data.length; i++) {
+                htmls += '<tr>';
+                if (data[i].type == 'f') {
+                    htmls += '<td valign="top"><img src="./img/text.gif" alt="[DIR]"></td>'
+                } else {
+                    htmls += '<td valign="top"><img src="./img/folder.gif" alt="[DIR]"></td>'
+                }
+
+                htmls += '<td><a href="">' + data[i].name + '/</a> </td>'
+                htmls += '<td align="right">' + data[i].mtime + ' </td>'
+                htmls += '<td align="right"> ' + data[i].size + ' </td>'
+                htmls += '<td>&nbsp;</td>'
+                htmls += '</tr>'
+            }
+            document.getElementsByTagName('tbody')[0].innerHTML += htmls;
+        }
+    }
+
+    xhr.open('get', './file_list');
+    xhr.send();
+
+    //console.log(s);
+</script>
+</html>
